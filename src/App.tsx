@@ -1,34 +1,19 @@
 import React, { useState } from "react";
+import styled from "styled-components";
+
+const Container = styled.div`
+  background-color: ${(props) => props.theme.bgColor};
+`;
+
+const H1 = styled.h1`
+  color: ${(props) => props.theme.textColor};
+`;
 
 function App() {
-  const [value, setValue] = useState("");
-
-  // Input element가 이 이벤트를 발생시켰다
-  const onChange = (event: React.FormEvent<HTMLInputElement>) => {
-    // react typescript 쓰는 사람은 currentTarget을 선택함.
-    const {
-      currentTarget: { value },
-    } = event;
-    setValue(value);
-  };
-
-  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    console.log("hello", value);
-  };
-
   return (
-    <div>
-      <form onSubmit={onSubmit}>
-        <input
-          type="text"
-          placeholder="username"
-          value={value}
-          onChange={onChange}
-        />
-        <button>Log in</button>
-      </form>
-    </div>
+    <Container>
+      <H1>Protected</H1>
+    </Container>
   );
 }
 

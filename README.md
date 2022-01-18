@@ -51,4 +51,16 @@ return
 
 * react query를 사용하면 데이터를 캐시에 저장하고 있어서 다른 페이지 왔다갔다 해도 데이터를 다시 가져오지 않음
 
+* Devtools
+캐시에 있는 query를 볼 수 있음
+1. App.tsx에서 import
+2. 아래 jsx를 Router 밑에 두기
+<ReactQueryDevtools initialIsOpen={true} />
+
+* 한 파일에 useQuery를 여러개 사용한다면?
+1. isLoading, data 등 변수가 중복 선언되어서 에러 발생
+-> {isLoading: infoLoading } 으로 이름을 변경할 수 있다
+2. querykey를 같은거로 할 수 없음
+-> querykey가 array 형태로 됨
+-> querykey를 지정할 때 array로 만들어서 array 값을 다르게 하면 됨
 ```

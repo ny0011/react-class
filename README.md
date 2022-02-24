@@ -64,3 +64,7 @@ return
 -> querykey가 array 형태로 됨
 -> querykey를 지정할 때 array로 만들어서 array 값을 다르게 하면 됨
 ```
+
+### Apexcharts
+
+- 그래프를 예쁘게 그려주는 라이브러리

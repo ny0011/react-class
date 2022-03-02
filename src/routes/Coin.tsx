@@ -1,5 +1,5 @@
 import { useQuery } from "react-query";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import {
   Link,
   Route,
@@ -7,6 +7,7 @@ import {
   useLocation,
   useParams,
   useRouteMatch,
+  useHistory,
 } from "react-router-dom";
 import styled from "styled-components";
 import { fetchCoinInfo, fetchCoinTickers } from "../api";
@@ -24,6 +25,7 @@ const Header = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 `;
 
 const Title = styled.h1`
@@ -78,6 +80,12 @@ const Tab = styled.span<{ isActive: boolean }>`
   a {
     display: block;
   }
+`;
+
+const Back = styled(Link)`
+  position: absolute;
+  font-size: 2em;
+  left: 2rem;
 `;
 
 interface RouteParams {
@@ -174,6 +182,7 @@ function Coin() {
         </title>
       </Helmet>
       <Header>
+        <Back to="/">🏠</Back>
         <Title>
           {state?.name ? state.name : loading ? "Loading.." : infoData?.name}
         </Title>

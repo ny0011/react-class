@@ -1,6 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 import Router from "./Router";
-import { ReactQueryDevtools } from 'react-query/devtools'
+import { ReactQueryDevtools } from "react-query/devtools";
+import { HelmetProvider } from "react-helmet-async";
 
 const GlobalStyle = createGlobalStyle`
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300;400&display=swap');
@@ -59,12 +60,15 @@ a{
 `;
 
 function App() {
-	return (
-		<>
-			<GlobalStyle /> <Router />
-			<ReactQueryDevtools initialIsOpen={true} />
-		</>
-	);
+  return (
+    <>
+      <GlobalStyle />
+      <HelmetProvider>
+        <Router />
+      </HelmetProvider>
+      <ReactQueryDevtools initialIsOpen={true} />
+    </>
+  );
 }
 
 export default App;

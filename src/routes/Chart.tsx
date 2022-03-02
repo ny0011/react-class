@@ -27,11 +27,15 @@ function Chart({ coinId }: ChartProps) {
         "Loading chart..."
       ) : (
         <ApexChart
-          type="line"
+          type="candlestick"
           series={[
             {
-              name: "price",
-              data: data?.map((price) => parseInt(price.close, 10)),
+              data: data?.map((price) => {
+                return {
+                  x: price.time_open,
+                  y: [price.open, price.high, price.low, price.close],
+                };
+              }),
             },
           ]}
           options={{
@@ -54,12 +58,11 @@ function Chart({ coinId }: ChartProps) {
               width: 3,
             },
             xaxis: {
+              type: "datetime",
               labels: {
                 show: false,
+                format: "M/dd",
               },
-              categories: data?.map((price) =>
-                price.time_open.slice(0, price.time_open.indexOf("T"))
-              ),
               axisTicks: {
                 show: false,
               },
@@ -73,6 +76,40 @@ function Chart({ coinId }: ChartProps) {
             yaxis: {
               labels: {
                 show: false,
+              },
+            },
+            plotOptions: {
+              candlestick: {
+                colors: {
+                  upward: "#FF6363",
+                  downward: "#219F94",
+                },
+              },
+            },
+            tooltip: {
+              custom: ({ dataPointIndex, w }) => {
+                const date = new Date(
+                  w.config.series[0].data[dataPointIndex].x
+                ).toLocaleDateString("ko-KR", {
+                  month: "numeric",
+                  day: "numeric",
+                });
+                const open =
+                  w.config.series[0].data[dataPointIndex].y[0].toFixed(2);
+                const high =
+                  w.config.series[0].data[dataPointIndex].y[1].toFixed(2);
+                const left =
+                  w.config.series[0].data[dataPointIndex].y[2].toFixed(2);
+                const close =
+                  w.config.series[0].data[dataPointIndex].y[3].toFixed(2);
+                return `
+                <div class="apexcharts-tooltip-title">${date} </div>
+                <div class="apexcharts-tooltip-box apexcharts-tooltip-candlestick">
+                  <div>Open: <span>${open}</span></div>
+                  <div>High: <span>${high}</span></div>
+                  <div>Left: <span>${left}</span></div>
+                  <div>Close: <span>${close}</span></div>
+                </div>`;
               },
             },
           }}

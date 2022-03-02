@@ -42,8 +42,11 @@ react query가 있으면 useEffect, useState가 없어도 됨!
 useQuery("Query Key", fetcher 함수)
 
 argument
-- Query Key : 이 query의 고유 식별자
-- fetcher 함수 : 2에서 만든 함수
+* 첫번째 - Query Key : 이 query의 고유 식별자
+* 두번째 - fetcher 함수 : 2에서 만든 함수
+* 세번째 - option
+** 그 중에서 refetchInterval를 사용하면 fetch를 실행하는 주기를 설정할 수 있다
+ex) refetchInterval : 5000
 
 return
 - isLoading : 응답이 왔는지 아닌지 확인하는 함수
@@ -68,3 +71,5 @@ return
 ### Apexcharts
 
 - 그래프를 예쁘게 그려주는 라이브러리
+
+### React Helmet

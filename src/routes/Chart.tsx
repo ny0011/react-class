@@ -88,22 +88,18 @@ function Chart({ coinId }: ChartProps) {
             },
             tooltip: {
               custom: ({ dataPointIndex, w }) => {
-                const date = new Date(
-                  w.config.series[0].data[dataPointIndex].x
-                ).toLocaleDateString("ko-KR", {
+                const data = w.config.series[0].data[dataPointIndex]
+                const date = new Date(data.x).toLocaleDateString("ko-KR", {
                   month: "numeric",
                   day: "numeric",
                 });
-                const open =
-                  w.config.series[0].data[dataPointIndex].y[0].toFixed(2);
-                const high =
-                  w.config.series[0].data[dataPointIndex].y[1].toFixed(2);
-                const left =
-                  w.config.series[0].data[dataPointIndex].y[2].toFixed(2);
-                const close =
-                  w.config.series[0].data[dataPointIndex].y[3].toFixed(2);
+                const open = data.y[0].toFixed(2);
+                const high = data.y[1].toFixed(2);
+                const left = data.y[2].toFixed(2);
+                const close = data.y[3].toFixed(2);
+
                 return `
-                <div class="apexcharts-tooltip-title">${date} </div>
+                <div class="apexcharts-tooltip-title">${date}</div>
                 <div class="apexcharts-tooltip-box apexcharts-tooltip-candlestick">
                   <div>Open: <span>${open}</span></div>
                   <div>High: <span>${high}</span></div>

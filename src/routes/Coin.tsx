@@ -7,7 +7,6 @@ import {
   useLocation,
   useParams,
   useRouteMatch,
-  useHistory,
 } from "react-router-dom";
 import styled from "styled-components";
 import { fetchCoinInfo, fetchCoinTickers } from "../api";

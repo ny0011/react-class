@@ -101,3 +101,17 @@ isDark : App -> Router -> Coin -> Chart
 ```
 ### Recoil
 - 상태 관리를 쉽게 해 주는 라이브러리
+```
+설정 방법
+1. index.tsx에서 RecoilRoot로 App을 감싼다
+2. atoms.ts라는 파일을 만들어 recoil의 atom 함수를 가져온다
+3. atom을 사용하는 새 함수를 생성하는데 atom에 { key: "", default: ""} 를 넣어준다
+export const isDarkAtom = atom({
+    key: "isDark",
+    default: false
+})
+
+사용 방법
+4. App.tsx에서 useRecoilValue로 값을 가져온다
+const isDark = useRecoilValue(isDarkAtom)
+```

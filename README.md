@@ -73,3 +73,9 @@ return
 - 그래프를 예쁘게 그려주는 라이브러리
 
 ### React Helmet
+- head를 쉽게 관리하기 위해 쓰는 라이브러리
+
+### State Management
+- 상태 관리를 할 때 useState(), Recoil 등을 사용함
+- 라이트/다크모드를 변경하는 것도 상태 변화에 속함
+- 처음에는 useState만으로 테마 변경해봄

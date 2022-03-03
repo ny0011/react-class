@@ -15,13 +15,14 @@ const Header = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
+  font-weight: bold;
 `;
 
 const CoinsList = styled.ul``;
 
 const Coin = styled.li`
-  background-color: white;
-  color: ${(props) => props.theme.bgColor};
+  background-color:  ${(props) => props.theme.cardBgColor};
+  color: ${(props) => props.theme.textColor};
   margin-bottom: 10px;
   border-radius: 15px;
   a {
@@ -29,6 +30,7 @@ const Coin = styled.li`
     align-items: center;
     transition: color 0.2s ease-in;
     padding: 20px;
+    font-weight: bold;
   }
   &:hover {
     a {

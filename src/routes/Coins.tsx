@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { fetchCoins } from "../api";
 import { isDarkAtom } from "../atoms";
@@ -21,52 +21,58 @@ const Header = styled.header`
   position: relative;
 `;
 
+const ButtonContainer = styled.div`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  right: 1rem;
+  width: 60px;
+  height: 30px;
+  border: none;
+  border-radius: 1em;
+  padding: 2px 10px;
+  background-color: ${(props) => props.theme.cardBgColor}; 
+`
 const Button = styled.button`
+  position: absolute;
   border: none;
   border-radius: 50%;
-  width: 24px;
-  height: 24px;
-  position: absolute;
+  width: 30px;
+  height: 30px;
   background-color: ${(props) => props.theme.accentColor};
   margin: 0;
   z-index: 1;
   transition: transform 250ms linear;
+  left: 0.1rem;
 `
 
 const Input = styled.input`
+  position: absolute;
+  left: 0rem;
+  border: none;
+  border-radius: 50%;
   cursor: pointer;
   opacity: 0;
-  width: 55px;
-  height: 22px;
+  width: 75px;
+  height: 30px;
   z-index: 2;
   &:checked + ${Button}{
-    transform: translateX(2.2em);
+    transform: translateX(3.5em);
   }
 `
 
-const ButtonContainer = styled.label`
-  position: absolute;
-  display: flex;
-  align-items: center;
-  right: 2rem;
-  width: 50px;
-  height: 22px;
-  border: none;
-  border-radius: 1em;
-  padding: 2px 10px;
-  background-color: ${(props) => props.theme.cardBgColor};
-  
-`
-
 const DarkEmoji = styled.div`
+  font-size: 1.5em;
+  left: 0rem;
   width: 10px;
-  height: 16px;
+  height: 24px;
   position: absolute;
 `
 const LightEmoji = styled.div`
-  width: 10px;
-  height: 16px;
-  right: 1.1rem;
+  font-size: 1.5em;
+  width: 12px;
+  height: 24px;
+  right: 1.3rem;
   position: absolute;
 `
 
@@ -77,6 +83,7 @@ const Coin = styled.li`
   color: ${(props) => props.theme.textColor};
   margin-bottom: 10px;
   border-radius: 15px;
+  font-size: 20px;
   a {
     display: flex;
     align-items: center;

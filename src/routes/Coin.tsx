@@ -52,8 +52,8 @@ const OverviewItem = styled.div`
   flex-direction: column;
   align-items: center;
   span:first-child {
-    font-size: 10px;
-    font-weight: 400;
+    font-size: 18px;
+    font-weight: 600;
     text-transform: uppercase;
     margin-bottom: 5px;
   }
@@ -72,7 +72,7 @@ const Tabs = styled.div`
 const Tab = styled.span<{ isActive: boolean }>`
   text-align: center;
   text-transform: uppercase;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: bold;
   background-color: ${(props) => props.theme.cardBgColor};
   padding: 7px 0px;
@@ -86,8 +86,13 @@ const Tab = styled.span<{ isActive: boolean }>`
 
 const Back = styled(Link)`
   position: absolute;
-  font-size: 2em;
   left: 2rem;
+  font-size: 1.8em;
+  border: none;
+  border-radius: 1em;
+  padding: 5px 10px;
+  background-color: ${(props) => props.theme.cardBgColor};
+  cursor: pointer;
 `;
 
 const Button = styled.button`
@@ -98,6 +103,7 @@ const Button = styled.button`
   border-radius: 1em;
   padding: 5px 10px;
   background-color: ${(props) => props.theme.cardBgColor};
+  cursor: pointer;
 `
 
 interface RouteParams {
@@ -211,26 +217,26 @@ function Coin() {
         <>
           <Overview>
             <OverviewItem>
-              <span>Rank:</span>
+              <span>Rank</span>
               <span>{infoData?.rank}</span>
             </OverviewItem>
             <OverviewItem>
-              <span>Symbol:</span>
+              <span>Symbol</span>
               <span>${infoData?.symbol}</span>
             </OverviewItem>
             <OverviewItem>
-              <span>Price:</span>
+              <span>Price</span>
               <span>${tickersData?.quotes?.USD?.price?.toFixed(2)}</span>
             </OverviewItem>
           </Overview>
           <Description>{infoData?.description}</Description>
           <Overview>
             <OverviewItem>
-              <span>Total Supply:</span>
+              <span>Total Supply</span>
               <span>{tickersData?.total_supply}</span>
             </OverviewItem>
             <OverviewItem>
-              <span>Max Supply:</span>
+              <span>Max Supply</span>
               <span>{tickersData?.max_supply}</span>
             </OverviewItem>
           </Overview>

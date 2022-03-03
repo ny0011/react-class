@@ -75,7 +75,29 @@ return
 ### React Helmet
 - head를 쉽게 관리하기 위해 쓰는 라이브러리
 
-### State Management
+## State Management
 - 상태 관리를 할 때 useState(), Recoil 등을 사용함
 - 라이트/다크모드를 변경하는 것도 상태 변화에 속함
 - 처음에는 useState만으로 테마 변경해봄
+```
+useState로만 다크모드 만들기
+1. index.tsx -> App.tsx로 ThemeProvider를 가져온다
+2. (App.tsx) isDark라는 state를 생성
+3. (App.tsx) toggleDark 함수를 만들어 isDark 상태 변경
+4. Coins.tsx에서 App.tsx toggleDark를 사용하고 싶음
+4-1. toggleDark를 하위 컴포넌트가 사용할 수 있게 App.tsx에서 Router.tsx로 toggleDark를 전달
+4-2. (Router.tsx) typescript가 형식을 알 수 있게 Interface를 정의
+4-3. (Router.tsx) toggleDark를 Router 함수 안에 넣고 Coins에 전달
+5. Coins.tsx의 button에서 사용하기 위해 4-2~4-3를 반복
+6. Chart.tsx에서 isDark를 사용하고 싶다면?
+...
+-> 이 방법은 global state라고 함.
+사용할 컴포넌트에서 바로 사용할 수 없고 여러번 거쳐야 해서 복잡함.
+
+toggleDark : App -> Router -> Coins
+isDark : App -> Router -> Coin -> Chart
+
+이렇게 긴 여행을 떠나야 함..
+```
+### Recoil
+- 상태 관리를 쉽게 해 주는 라이브러리

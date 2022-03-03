@@ -12,6 +12,8 @@ import styled from "styled-components";
 import { fetchCoinInfo, fetchCoinTickers } from "../api";
 import Chart from "./Chart";
 import Price from "./Price";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { isDarkAtom } from "../atoms";
 
 const Container = styled.div`
   padding: 0px 20px;
@@ -88,6 +90,16 @@ const Back = styled(Link)`
   left: 2rem;
 `;
 
+const Button = styled.button`
+  position: absolute;
+  right: 2rem;
+  font-size: 1.5em;
+  border: none;
+  border-radius: 1em;
+  padding: 5px 10px;
+  background-color: ${(props) => props.theme.cardBgColor};
+`
+
 interface RouteParams {
   coinId: string;
 }
@@ -162,6 +174,10 @@ function Coin() {
   const priceMatch = useRouteMatch("/:coinId/price");
   const chartMatch = useRouteMatch("/:coinId/chart");
 
+  const setDarkAtom = useSetRecoilState(isDarkAtom)
+  const isDark = useRecoilValue(isDarkAtom)
+  const toggleDarkAtom = () => setDarkAtom(prev => !prev)
+
   const { isLoading: infoLoading, data: infoData } = useQuery<InfoData>(
     ["info", coinId],
     () => fetchCoinInfo(coinId)
@@ -187,6 +203,7 @@ function Coin() {
         <Title>
           {state?.name ? state.name : loading ? "Loading.." : infoData?.name}
         </Title>
+        <Button onClick={toggleDarkAtom}>{isDark ? '🌞':'🌚'}</Button>
       </Header>
       {loading ? (
         <Loader>Loading..</Loader>

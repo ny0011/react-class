@@ -114,4 +114,7 @@ export const isDarkAtom = atom({
 사용 방법
 4. App.tsx에서 useRecoilValue로 값을 가져온다
 const isDark = useRecoilValue(isDarkAtom)
+
+5. 값을 수정하고 싶을 때 useSetRecoilState을 사용해 값을 변경할 수 있는 setter함수를 가져온다
+const setterFn = useSetRecoilState(isDarkAtom)
 ```

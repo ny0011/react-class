@@ -1,7 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import { useQuery } from "react-query";
 import { Link } from "react-router-dom";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import styled from "styled-components";
 import { fetchCoins } from "../api";
 import { isDarkAtom } from "../atoms";
@@ -18,7 +18,57 @@ const Header = styled.header`
   justify-content: center;
   align-items: center;
   font-weight: bold;
+  position: relative;
 `;
+
+const Button = styled.button`
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  background-color: ${(props) => props.theme.accentColor};
+  margin: 0;
+  z-index: 1;
+  transition: transform 250ms linear;
+`
+
+const Input = styled.input`
+  cursor: pointer;
+  opacity: 0;
+  width: 55px;
+  height: 22px;
+  z-index: 2;
+  &:checked + ${Button}{
+    transform: translateX(2.2em);
+  }
+`
+
+const ButtonContainer = styled.label`
+  position: absolute;
+  display: flex;
+  align-items: center;
+  right: 2rem;
+  width: 50px;
+  height: 22px;
+  border: none;
+  border-radius: 1em;
+  padding: 2px 10px;
+  background-color: ${(props) => props.theme.cardBgColor};
+  
+`
+
+const DarkEmoji = styled.div`
+  width: 10px;
+  height: 16px;
+  position: absolute;
+`
+const LightEmoji = styled.div`
+  width: 10px;
+  height: 16px;
+  right: 1.1rem;
+  position: absolute;
+`
 
 const CoinsList = styled.ul``;
 
@@ -70,6 +120,8 @@ interface ICoin {
 
 function Coins() {
   const { isLoading, data } = useQuery<ICoin[]>("allCoins", fetchCoins);
+  const setDarkAtom = useSetRecoilState(isDarkAtom)
+  const toggleDarkAtom = () => setDarkAtom(prev => !prev)
 
   return (
     <Container>
@@ -77,7 +129,13 @@ function Coins() {
         <title>코인</title>
       </Helmet>
       <Header>
-        <Title>코인</Title>
+        <Title>코인</Title>        
+        <ButtonContainer  >
+          <LightEmoji>🌞</LightEmoji>
+          <Input type="checkbox" onClick={toggleDarkAtom} ></Input>
+          <Button ></Button>
+          <DarkEmoji>🌚</DarkEmoji>
+        </ButtonContainer>
       </Header>
       {isLoading ? (
         <Loader>Loading..</Loader>

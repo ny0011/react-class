@@ -57,7 +57,7 @@ function Price({ coinId }: PriceProps) {
               <span>${todayObjData?.open.toFixed(2)}</span>
             </List>
             <List>
-              <span>🍻close</span>
+              <span>🍻current</span>
               <span>${todayObjData?.close.toFixed(2)}</span>
             </List>
             <List>

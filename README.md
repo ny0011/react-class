@@ -73,12 +73,15 @@ return
 - 그래프를 예쁘게 그려주는 라이브러리
 
 ### React Helmet
+
 - head를 쉽게 관리하기 위해 쓰는 라이브러리
 
 ## State Management
+
 - 상태 관리를 할 때 useState(), Recoil 등을 사용함
 - 라이트/다크모드를 변경하는 것도 상태 변화에 속함
 - 처음에는 useState만으로 테마 변경해봄
+
 ```
 useState로만 다크모드 만들기
 1. index.tsx -> App.tsx로 ThemeProvider를 가져온다
@@ -99,8 +102,11 @@ isDark : App -> Router -> Coin -> Chart
 
 이렇게 긴 여행을 떠나야 함..
 ```
+
 ### Recoil
+
 - 상태 관리를 쉽게 해 주는 라이브러리
+
 ```
 설정 방법
 1. index.tsx에서 RecoilRoot로 App을 감싼다
@@ -118,3 +124,8 @@ const isDark = useRecoilValue(isDarkAtom)
 5. 값을 수정하고 싶을 때 useSetRecoilState을 사용해 값을 변경할 수 있는 setter함수를 가져온다
 const setterFn = useSetRecoilState(isDarkAtom)
 ```
+
+### deploy gh-pages
+
+- BrowserRouter를 사용하면 URL을 복붙했을 때 바로 이동하지 않고 github가 404에러를 낸다
+  https://github.com/rafgraph/spa-github-pages

@@ -14,72 +14,77 @@ const Container = styled.div`
 
 const Header = styled.header`
   height: 10vh;
+  display: grid;
+  grid-template-columns: repeat(1, 3.5em 1fr 3.5em);
+  font-weight: bold;
+`;
+const HeaderContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: bold;
-  position: relative;
 `;
 
 const ButtonContainer = styled.div`
-  position: absolute;
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  right: 1rem;
-  width: 60px;
-  height: 30px;
+  position: relative;
+  width: 100%;
+  height: 1.4em;
   border: none;
   border-radius: 1em;
-  padding: 2px 10px;
-  background-color: ${(props) => props.theme.cardBgColor}; 
-`
-const Button = styled.button`
+  background-color: ${(props) => props.theme.cardBgColor};
+`;
+const Button = styled.div`
   position: absolute;
   border: none;
   border-radius: 50%;
-  width: 30px;
-  height: 30px;
+  width: 1.5em;
+  height: 1.5em;
   background-color: ${(props) => props.theme.accentColor};
   margin: 0;
   z-index: 1;
-  transition: transform 250ms linear;
-  left: 0.1rem;
-`
+  transition: transform 200ms linear;
+  left: 0em;
+`;
 
 const Input = styled.input`
   position: absolute;
-  left: 0rem;
+  left: 0em;
   border: none;
   border-radius: 50%;
   cursor: pointer;
   opacity: 0;
-  width: 75px;
-  height: 30px;
+  width: 90%;
+  height: 1em;
   z-index: 2;
-  &:checked + ${Button}{
-    transform: translateX(3.5em);
+  &:checked + ${Button} {
+    transform: translateX(2em);
   }
-`
+`;
+const Emoji = styled.div`
+  height: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1em;
+  position: relative;
+`;
 
 const DarkEmoji = styled.div`
-  font-size: 1.5em;
-  left: 0rem;
-  width: 10px;
-  height: 24px;
+  width: 30%;
   position: absolute;
-`
+  right: 1.4em;
+`;
 const LightEmoji = styled.div`
-  font-size: 1.5em;
-  width: 12px;
-  height: 24px;
-  right: 1.3rem;
+  width: 30%;
   position: absolute;
-`
+`;
 
 const CoinsList = styled.ul``;
 
 const Coin = styled.li`
-  background-color:  ${(props) => props.theme.cardBgColor};
+  background-color: ${(props) => props.theme.cardBgColor};
   color: ${(props) => props.theme.textColor};
   margin-bottom: 10px;
   border-radius: 15px;
@@ -124,11 +129,10 @@ interface ICoin {
   type: string;
 }
 
-
 function Coins() {
   const { isLoading, data } = useQuery<ICoin[]>("allCoins", fetchCoins);
-  const setDarkAtom = useSetRecoilState(isDarkAtom)
-  const toggleDarkAtom = () => setDarkAtom(prev => !prev)
+  const setDarkAtom = useSetRecoilState(isDarkAtom);
+  const toggleDarkAtom = () => setDarkAtom((prev) => !prev);
 
   return (
     <Container>
@@ -136,13 +140,23 @@ function Coins() {
         <title>코인</title>
       </Helmet>
       <Header>
-        <Title>코인</Title>        
-        <ButtonContainer  >
-          <LightEmoji>🌞</LightEmoji>
-          <Input type="checkbox" onClick={toggleDarkAtom} ></Input>
-          <Button ></Button>
-          <DarkEmoji>🌚</DarkEmoji>
-        </ButtonContainer>
+        <HeaderContainer></HeaderContainer>
+        <HeaderContainer>
+          <Title>코인</Title>
+        </HeaderContainer>
+        <HeaderContainer>
+          <ButtonContainer>
+            <Emoji>
+              <LightEmoji>🌞</LightEmoji>
+            </Emoji>
+
+            <Input type="checkbox" onClick={toggleDarkAtom}></Input>
+            <Button></Button>
+            <Emoji>
+              <DarkEmoji>🌚</DarkEmoji>
+            </Emoji>
+          </ButtonContainer>
+        </HeaderContainer>
       </Header>
       {isLoading ? (
         <Loader>Loading..</Loader>

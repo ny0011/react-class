@@ -22,17 +22,35 @@ const Container = styled.div`
 `;
 
 const Header = styled.header`
+  width: 100%;
   height: 10vh;
+  display: grid;
+  grid-template-columns: repeat(1, 15% 1fr 15%);
+`;
+
+const HeaderContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
 `;
 
 const Title = styled.h1`
-  font-size: 48px;
+  font-size: 2em;
   color: ${(props) => props.theme.accentColor};
   font-weight: bold;
+`;
+
+const Button = styled.div`
+  font-size: 1.5em;
+  border: none;
+  border-radius: 1em;
+  background-color: ${(props) => props.theme.cardBgColor};
+  cursor: pointer;
+  padding: 5px 10px;
+`;
+
+const Icon = styled.div`
+  font-size: 1em;
 `;
 
 const Loader = styled.span`
@@ -83,28 +101,6 @@ const Tab = styled.span<{ isActive: boolean }>`
     display: block;
   }
 `;
-
-const Back = styled(Link)`
-  position: absolute;
-  left: 2rem;
-  font-size: 1.8em;
-  border: none;
-  border-radius: 1em;
-  padding: 5px 10px;
-  background-color: ${(props) => props.theme.cardBgColor};
-  cursor: pointer;
-`;
-
-const Button = styled.button`
-  position: absolute;
-  right: 2rem;
-  font-size: 1.5em;
-  border: none;
-  border-radius: 1em;
-  padding: 5px 10px;
-  background-color: ${(props) => props.theme.cardBgColor};
-  cursor: pointer;
-`
 
 interface RouteParams {
   coinId: string;
@@ -173,16 +169,15 @@ interface PriceData {
   };
 }
 
-
 function Coin() {
   const { coinId } = useParams<RouteParams>();
   const { state } = useLocation<RouteState>();
   const priceMatch = useRouteMatch("/:coinId/price");
   const chartMatch = useRouteMatch("/:coinId/chart");
 
-  const setDarkAtom = useSetRecoilState(isDarkAtom)
-  const isDark = useRecoilValue(isDarkAtom)
-  const toggleDarkAtom = () => setDarkAtom(prev => !prev)
+  const setDarkAtom = useSetRecoilState(isDarkAtom);
+  const isDark = useRecoilValue(isDarkAtom);
+  const toggleDarkAtom = () => setDarkAtom((prev) => !prev);
 
   const { isLoading: infoLoading, data: infoData } = useQuery<InfoData>(
     ["info", coinId],
@@ -205,11 +200,21 @@ function Coin() {
         </title>
       </Helmet>
       <Header>
-        <Back to="/">🏠</Back>
-        <Title>
-          {state?.name ? state.name : loading ? "Loading.." : infoData?.name}
-        </Title>
-        <Button onClick={toggleDarkAtom}>{isDark ? '🌞':'🌚'}</Button>
+        <HeaderContainer>
+          <Button as="a" href={process.env.PUBLIC_URL}>
+            <Icon>🏠</Icon>
+          </Button>
+        </HeaderContainer>
+        <HeaderContainer>
+          <Title>
+            {state?.name ? state.name : loading ? "Loading.." : infoData?.name}
+          </Title>
+        </HeaderContainer>
+        <HeaderContainer>
+          <Button onClick={toggleDarkAtom}>
+            <Icon>{isDark ? "🌞" : "🌚"}</Icon>
+          </Button>
+        </HeaderContainer>
       </Header>
       {loading ? (
         <Loader>Loading..</Loader>

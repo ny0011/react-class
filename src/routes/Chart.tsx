@@ -5,14 +5,14 @@ import { useRecoilValue } from "recoil";
 import { isDarkAtom } from "../atoms";
 
 interface IHistorical {
-  time_open: "string";
-  time_close: "string";
-  open: "number";
-  high: "number";
-  low: "number";
-  close: "number";
-  volume: "number";
-  market_cap: "number";
+  time_open: string;
+  time_close: string;
+  open: number;
+  high: number;
+  low: number;
+  close: number;
+  volume: number;
+  market_cap: number;
 }
 
 interface ChartProps {
@@ -23,7 +23,7 @@ function Chart({ coinId }: ChartProps) {
   const { isLoading, data } = useQuery<IHistorical[]>(["ohlcv", coinId], () =>
     fetchCoinHistory(coinId)
   );
-  const isDark = useRecoilValue(isDarkAtom)
+  const isDark = useRecoilValue(isDarkAtom);
   return (
     <div>
       {isLoading ? (
@@ -43,7 +43,7 @@ function Chart({ coinId }: ChartProps) {
           ]}
           options={{
             theme: {
-              mode: isDark? "dark" : "light",
+              mode: isDark ? "dark" : "light",
             },
             chart: {
               height: 500,
@@ -91,7 +91,7 @@ function Chart({ coinId }: ChartProps) {
             },
             tooltip: {
               custom: ({ dataPointIndex, w }) => {
-                const data = w.config.series[0].data[dataPointIndex]
+                const data = w.config.series[0].data[dataPointIndex];
                 const date = new Date(data.x).toLocaleDateString("ko-KR", {
                   month: "numeric",
                   day: "numeric",

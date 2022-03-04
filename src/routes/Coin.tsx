@@ -131,10 +131,6 @@ interface InfoData {
   last_data_at: string;
 }
 
-// 앞은 console.log(priceData)로 데이터 찍어서 우클릭 -> 전역 변수로 object 저장
-// Object.keys(temp1).join() 하면 얻을 수 잇음
-// 뒤는 Object.values(temp1).map(v => typeof v).join()
-
 interface PriceData {
   id: string;
   name: string;
@@ -250,16 +246,16 @@ function Coin() {
               <Link to={`/${coinId}/chart`}>Chart</Link>
             </Tab>
             <Tab isActive={priceMatch !== null}>
-              <Link to={`/${coinId}/price`}>Price</Link>
+              <Link to={`/${coinId}/price`}>Today Price</Link>
             </Tab>
           </Tabs>
 
           <Switch>
-            <Route path={`/:coinId/price`}>
-              <Price />
-            </Route>
             <Route path={`/:coinId/chart`}>
               <Chart coinId={coinId} />
+            </Route>
+            <Route path={`/:coinId/price`}>
+              <Price coinId={coinId} />
             </Route>
           </Switch>
         </>

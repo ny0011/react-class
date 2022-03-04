@@ -4,6 +4,7 @@ import {
   Link,
   Route,
   Switch,
+  useHistory,
   useLocation,
   useParams,
   useRouteMatch,
@@ -170,6 +171,7 @@ function Coin() {
   const { state } = useLocation<RouteState>();
   const priceMatch = useRouteMatch("/:coinId/price");
   const chartMatch = useRouteMatch("/:coinId/chart");
+  const history = useHistory()
 
   const isDark = useRecoilValue(isDarkAtom);
   const setDarkAtom = useSetRecoilState(isDarkAtom);
@@ -197,7 +199,7 @@ function Coin() {
       </Helmet>
       <Header>
         <HeaderContainer>
-          <Button as="a" href={process.env.PUBLIC_URL}>
+          <Button as="a" onClick={() => history.push("/")}>
             <Icon>🏠</Icon>
           </Button>
         </HeaderContainer>

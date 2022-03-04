@@ -14,8 +14,14 @@ const List = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border: 1px solid ${(props) => props.theme.textColor};
+  border: 2px solid ${(props) => props.theme.textColor};
+  border-radius: 20% / 50%;
+  padding: 10px;
   margin: 20px;
+  & span:nth-child(2){
+    margin-top: 10px;
+    font-weight: bold;
+  }
 `;
 
 interface PriceProps {
@@ -47,19 +53,19 @@ function Price({ coinId }: PriceProps) {
         <>
           <Container>
             <List>
-              <span>open</span>
+              <span>🎬open</span>
               <span>${todayObjData?.open.toFixed(2)}</span>
             </List>
             <List>
-              <span>close</span>
+              <span>🍻close</span>
               <span>${todayObjData?.close.toFixed(2)}</span>
             </List>
             <List>
-              <span>low</span>
+              <span>😱low</span>
               <span>${todayObjData?.low.toFixed(2)}</span>
             </List>
             <List>
-              <span>high</span>
+              <span>🤑high</span>
               <span>${todayObjData?.high.toFixed(2)}</span>
             </List>
           </Container>

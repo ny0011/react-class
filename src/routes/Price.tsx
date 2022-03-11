@@ -18,7 +18,7 @@ const List = styled.div`
   border-radius: 20% / 50%;
   padding: 10px;
   margin: 20px;
-  & span:nth-child(2){
+  & span:nth-child(2) {
     margin-top: 10px;
     font-weight: bold;
   }
@@ -43,7 +43,10 @@ function Price({ coinId }: PriceProps) {
   const { isLoading, data } = useQuery<ITodayPrice[]>(["today", coinId], () =>
     fetchCoinToday(coinId)
   );
-  const todayObjData = data ? data[0] : undefined;
+  const todayObjData: any = data ? data[0] : {};
+  const displayKey = ["open", "close", "low", "high"];
+  const displayEmoji = ["🎬", "🍻", "😱", "🤑"];
+  const priceData = displayKey.map((data) => todayObjData[data]);
 
   return (
     <div>
@@ -52,22 +55,17 @@ function Price({ coinId }: PriceProps) {
       ) : (
         <>
           <Container>
-            <List>
-              <span>🎬open</span>
-              <span>${todayObjData?.open.toFixed(2)}</span>
-            </List>
-            <List>
-              <span>🍻current</span>
-              <span>${todayObjData?.close.toFixed(2)}</span>
-            </List>
-            <List>
-              <span>😱low</span>
-              <span>${todayObjData?.low.toFixed(2)}</span>
-            </List>
-            <List>
-              <span>🤑high</span>
-              <span>${todayObjData?.high.toFixed(2)}</span>
-            </List>
+            {displayKey.map((data, index) => {
+              return (
+                <List key={index}>
+                  <span>
+                    {displayEmoji[index]}
+                    {data}
+                  </span>
+                  <span>${priceData[index].toFixed(2)}</span>
+                </List>
+              );
+            })}
           </Container>
         </>
       )}
